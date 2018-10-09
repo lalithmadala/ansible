@@ -1,0 +1,26 @@
+---
+ - hosts: cent
+   remote_user: root
+   gather_facts: false
+   vars_prompt:
+    - name: newport
+      prompt: enter tomcat port
+      private: no
+
+   tasks:
+    - name: to update repo
+      raw: yum -y update
+
+    - name: to install java
+      raw: yum  install -y java
+
+    - name: to install tomcat
+      yum: name=tomcat state=present
+
+    - name: to change poprt
+      template:
+       src: /root/playbooks/templates/demo.j2
+       dest: /etc/tomcat/server.xml
+
+    - name: to restart srvice
+      service: name=tomcat state=started
