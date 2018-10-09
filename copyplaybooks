@@ -1,0 +1,11 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: to copy file
+      copy:
+       src: /root/files/file1.txt
+       dest: /tmp/file1.txt
+    - name: to display msg
+      debug:
+       msg: file copied
